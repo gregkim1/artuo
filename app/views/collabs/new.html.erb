@@ -24,7 +24,7 @@
           Artwork
         </label>
 
-        <input type="text" id="artwork_id" name="artwork_id" placeholder="Artwork" class="form-control" value="<%= @collab.artwork_id %>">
+        <%= select_tag(:artwork_id, options_from_collection_for_select(Artwork.all, :id, :caption, @collab.artwork_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for artist_id -->
