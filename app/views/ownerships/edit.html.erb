@@ -33,7 +33,7 @@
           Artwork
         </label>
 
-        <input type="text" id="artwork_id" name="artwork_id" placeholder="Artwork" class="form-control" value="<%= @ownership.artwork_id %>">
+        <%= select_tag(:artwork_id, options_from_collection_for_select(Artwork.all, :id, :caption, @ownership.artwork_id), :class => "form-control") %>
       </div>
 
       <button class="btn btn-warning">
