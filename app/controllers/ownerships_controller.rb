@@ -10,7 +10,8 @@ class OwnershipsController < ApplicationController
   end
 
   def index
-    @ownerships = Ownership.page(params[:page]).per(10)
+    @q = Ownership.ransack(params[:q])
+    @ownerships = @q.result(:distinct => true).includes(:user, :artwork).page(params[:page]).per(10)
 
     render("ownerships/index.html.erb")
   end

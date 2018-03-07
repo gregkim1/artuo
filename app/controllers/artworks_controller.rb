@@ -1,6 +1,7 @@
 class ArtworksController < ApplicationController
   def index
-    @artworks = Artwork.page(params[:page]).per(10)
+    @q = Artwork.ransack(params[:q])
+    @artworks = @q.result(:distinct => true).includes(:ownerships, :taggings, :collabs).page(params[:page]).per(10)
 
     render("artworks/index.html.erb")
   end

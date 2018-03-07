@@ -1,6 +1,7 @@
 class CollabsController < ApplicationController
   def index
-    @collabs = Collab.page(params[:page]).per(10)
+    @q = Collab.ransack(params[:q])
+    @collabs = @q.result(:distinct => true).includes(:artist, :art).page(params[:page]).per(10)
 
     render("collabs/index.html.erb")
   end
