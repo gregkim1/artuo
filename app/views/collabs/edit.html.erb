@@ -33,7 +33,7 @@
           Artist
         </label>
 
-        <input type="text" id="artist_id" name="artist_id" placeholder="Artist" class="form-control" value="<%= @collab.artist_id %>">
+        <%= select_tag(:artist_id, options_from_collection_for_select(User.all, :id, :email, @collab.artist_id), :class => "form-control") %>
       </div>
 
       <button class="btn btn-warning">
