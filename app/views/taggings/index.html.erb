@@ -17,7 +17,7 @@
       <% @taggings.each do |tagging| %>
       <tr>
         <td><%= tagging.artwork.caption %></td>
-        <td><%= tagging.tag_id %></td>
+        <td><%= tagging.tag.created_at %></td>
         <td>
           <a href="/taggings/<%= tagging.id %>" class="btn btn-primary">Show</a>
           <a href="/taggings/<%= tagging.id %>/edit" class="btn btn-warning">Edit</a>
