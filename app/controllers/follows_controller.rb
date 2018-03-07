@@ -1,4 +1,14 @@
 class FollowsController < ApplicationController
+  before_action :current_user_must_be_follow_artist, :only => [:edit, :update, :destroy]
+
+  def current_user_must_be_follow_artist
+    follow = Follow.find(params[:id])
+
+    unless current_user == follow.artist
+      redirect_to :back, :alert => "You are not authorized for that."
+    end
+  end
+
   before_action :current_user_must_be_follow_user, :only => [:edit, :update, :destroy]
 
   def current_user_must_be_follow_user
