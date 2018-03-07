@@ -20,8 +20,11 @@
         <td><%= ownership.artwork.caption %></td>
         <td>
           <a href="/ownerships/<%= ownership.id %>" class="btn btn-primary">Show</a>
-          <a href="/ownerships/<%= ownership.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_ownership/<%= ownership.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          
+          <% if current_user == ownership.user %>
+            <a href="/ownerships/<%= ownership.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_ownership/<%= ownership.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% end %>
         </td>
       </tr>
       <% end %>
