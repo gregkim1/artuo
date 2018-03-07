@@ -17,12 +17,14 @@
       <a href="/follows" class="btn btn-primary">
         Back
       </a>
-      <a href="/follows/<%= @follow.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_follow/<%= @follow.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
+      <% if current_user == @follow.user %>
+        <a href="/follows/<%= @follow.id %>/edit" class="btn btn-warning">
+          Edit
+        </a>
+        <a href="/delete_follow/<%= @follow.id %>" class="btn btn-danger" rel="nofollow">
+          Delete
+        </a>
+      <% end %>
     </div>
   </div>
 </div>
