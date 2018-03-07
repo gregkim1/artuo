@@ -6,10 +6,22 @@
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
       <dt>User</dt>
-      <dd><%= @follow.user_id %></dd>
+      <dd>
+        <% if @follow.user.present? %>
+          <a href="/users/<%= @follow.user_id %>">
+            <%= @follow.user.email %>
+          </a>
+        <% end %>
+      </dd>
 
       <dt>Artist</dt>
-      <dd><%= @follow.artist_id %></dd>
+      <dd>
+        <% if @follow.artist.present? %>
+          <a href="/users/<%= @follow.artist_id %>">
+            <%= @follow.artist.email %>
+          </a>
+        <% end %>
+      </dd>
 
     </dl>
 

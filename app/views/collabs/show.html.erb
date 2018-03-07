@@ -6,10 +6,22 @@
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
       <dt>Artwork</dt>
-      <dd><%= @collab.artwork_id %></dd>
+      <dd>
+        <% if @collab.art.present? %>
+          <a href="/artworks/<%= @collab.artwork_id %>">
+            <%= @collab.art.caption %>
+          </a>
+        <% end %>
+      </dd>
 
       <dt>Artist</dt>
-      <dd><%= @collab.artist_id %></dd>
+      <dd>
+        <% if @collab.artist.present? %>
+          <a href="/users/<%= @collab.artist_id %>">
+            <%= @collab.artist.email %>
+          </a>
+        <% end %>
+      </dd>
 
     </dl>
 
