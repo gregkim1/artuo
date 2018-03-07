@@ -6,6 +6,9 @@ class ArtworksController < ApplicationController
   end
 
   def show
+    @collab = Collab.new
+    @tagging = Tagging.new
+    @ownership = Ownership.new
     @artwork = Artwork.find(params[:id])
 
     render("artworks/show.html.erb")
