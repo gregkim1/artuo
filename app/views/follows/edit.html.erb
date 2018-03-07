@@ -21,14 +21,8 @@
       
       
 
-      <!-- Label and input for artist_id -->
-      <div class="form-group">
-        <label for="artist_id" class="control-label">
-          Artist
-        </label>
-
-        <%= select_tag(:artist_id, options_from_collection_for_select(User.all, :id, :email, @follow.artist_id), :class => "form-control") %>
-      </div>
+      
+      
 
       <button class="btn btn-warning">
         Update Follow
