@@ -47,8 +47,6 @@ class OwnershipsController < ApplicationController
 
   def update
     @ownership = Ownership.find(params[:id])
-
-    @ownership.user_id = params[:user_id]
     @ownership.artwork_id = params[:artwork_id]
 
     save_status = @ownership.save
