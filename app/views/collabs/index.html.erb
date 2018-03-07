@@ -17,7 +17,7 @@
       <% @collabs.each do |collab| %>
       <tr>
         <td><%= collab.art.caption %></td>
-        <td><%= collab.artist_id %></td>
+        <td><%= collab.artist.email %></td>
         <td>
           <a href="/collabs/<%= collab.id %>" class="btn btn-primary">Show</a>
           <a href="/collabs/<%= collab.id %>/edit" class="btn btn-warning">Edit</a>
