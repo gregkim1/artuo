@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h1>
+    Collabs
+    <a href="/collabs/new" class="btn btn-lg btn-success">New Collab</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Artwork</th>
+        <th>Artist</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @collabs.each do |collab| %>
+      <tr>
+        <td><%= collab.artwork_id %></td>
+        <td><%= collab.artist_id %></td>
+        <td>
+          <a href="/collabs/<%= collab.id %>" class="btn btn-primary">Show</a>
+          <a href="/collabs/<%= collab.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_collab/<%= collab.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

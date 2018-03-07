@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # Routes for the Collab resource:
+  # CREATE
+  get "/collabs/new", :controller => "collabs", :action => "new"
+  post "/create_collab", :controller => "collabs", :action => "create"
+
+  # READ
+  get "/collabs", :controller => "collabs", :action => "index"
+  get "/collabs/:id", :controller => "collabs", :action => "show"
+
+  # UPDATE
+  get "/collabs/:id/edit", :controller => "collabs", :action => "edit"
+  post "/update_collab/:id", :controller => "collabs", :action => "update"
+
+  # DELETE
+  get "/delete_collab/:id", :controller => "collabs", :action => "destroy"
+  #------------------------------
+
   # Routes for the Tag resource:
   # CREATE
   get "/tags/new", :controller => "tags", :action => "new"

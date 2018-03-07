@@ -1,0 +1,46 @@
+<!-- Validation failure messages -->
+<% if @collab.errors.any? %>
+  <% @collab.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Collab</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_collab" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for artwork_id -->
+      <div class="form-group">
+        <label for="artwork_id" class="control-label">
+          Artwork
+        </label>
+
+        <input type="text" id="artwork_id" name="artwork_id" placeholder="Artwork" class="form-control" value="<%= @collab.artwork_id %>">
+      </div>
+
+      <!-- Label and input for artist_id -->
+      <div class="form-group">
+        <label for="artist_id" class="control-label">
+          Artist
+        </label>
+
+        <input type="text" id="artist_id" name="artist_id" placeholder="Artist" class="form-control" value="<%= @collab.artist_id %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Collab
+      </button>
+      or
+      <a href="/collabs">Cancel</a>
+    </form>
+  </div>
+</div>

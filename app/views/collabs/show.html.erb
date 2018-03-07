@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h3>Collab #<%= @collab.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Artwork</dt>
+      <dd><%= @collab.artwork_id %></dd>
+
+      <dt>Artist</dt>
+      <dd><%= @collab.artist_id %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/collabs" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/collabs/<%= @collab.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_collab/<%= @collab.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
