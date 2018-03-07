@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # Routes for the Ownership resource:
+  # CREATE
+  get "/ownerships/new", :controller => "ownerships", :action => "new"
+  post "/create_ownership", :controller => "ownerships", :action => "create"
+
+  # READ
+  get "/ownerships", :controller => "ownerships", :action => "index"
+  get "/ownerships/:id", :controller => "ownerships", :action => "show"
+
+  # UPDATE
+  get "/ownerships/:id/edit", :controller => "ownerships", :action => "edit"
+  post "/update_ownership/:id", :controller => "ownerships", :action => "update"
+
+  # DELETE
+  get "/delete_ownership/:id", :controller => "ownerships", :action => "destroy"
+  #------------------------------
+
   # Routes for the Artwork resource:
   # CREATE
   get "/artworks/new", :controller => "artworks", :action => "new"
