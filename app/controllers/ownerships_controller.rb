@@ -10,7 +10,7 @@ class OwnershipsController < ApplicationController
   end
 
   def index
-    @ownerships = Ownership.all
+    @ownerships = Ownership.page(params[:page]).per(10)
 
     render("ownerships/index.html.erb")
   end

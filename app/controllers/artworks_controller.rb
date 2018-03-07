@@ -1,6 +1,6 @@
 class ArtworksController < ApplicationController
   def index
-    @artworks = Artwork.all
+    @artworks = Artwork.page(params[:page]).per(10)
 
     render("artworks/index.html.erb")
   end
