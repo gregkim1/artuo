@@ -1,7 +1,7 @@
 class TagsController < ApplicationController
   def index
     @q = Tag.ransack(params[:q])
-    @tags = @q.result(:distinct => true).includes(:taggings).page(params[:page]).per(10)
+    @tags = @q.result(:distinct => true).includes(:taggings, :artworks).page(params[:page]).per(10)
 
     render("tags/index.html.erb")
   end

@@ -1,8 +1,9 @@
-class CreateCollabs < ActiveRecord::Migration
+class CreateCreations < ActiveRecord::Migration
   def change
-    create_table :collabs do |t|
+    create_table :creations do |t|
       t.integer :artwork_id
       t.integer :artist_id
+      t.string :share
 
       t.timestamps
 

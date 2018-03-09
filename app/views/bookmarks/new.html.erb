@@ -1,6 +1,6 @@
 <!-- Validation failure messages -->
-<% if @collab.errors.any? %>
-  <% @collab.errors.full_messages.each do |message| %>
+<% if @bookmark.errors.any? %>
+  <% @bookmark.errors.full_messages.each do |message| %>
     <div class="alert alert-dismissable alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       <%= message %>
@@ -9,12 +9,12 @@
 <% end %>
 
 <div class="page-header">
-  <h3>Edit Collab #<%= @collab.id %></h3>
+  <h3>Add Bookmark</h3>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <form action="/update_collab/<%= @collab.id %>" method="post">
+    <form action="/create_bookmark" method="post">
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
@@ -24,23 +24,23 @@
           Artwork
         </label>
 
-        <%= select_tag(:artwork_id, options_from_collection_for_select(Artwork.all, :id, :caption, @collab.artwork_id), :class => "form-control") %>
+        <%= select_tag(:artwork_id, options_from_collection_for_select(Artwork.all, :id, :caption, @bookmark.artwork_id), :class => "form-control") %>
       </div>
 
-      <!-- Label and input for artist_id -->
+      <!-- Label and input for folder_id -->
       <div class="form-group">
-        <label for="artist_id" class="control-label">
-          Artist
+        <label for="folder_id" class="control-label">
+          Folder
         </label>
 
-        <%= select_tag(:artist_id, options_from_collection_for_select(User.all, :id, :email, @collab.artist_id), :class => "form-control") %>
+        <%= select_tag(:folder_id, options_from_collection_for_select(Folder.all, :id, :name, @bookmark.folder_id), :class => "form-control") %>
       </div>
 
-      <button class="btn btn-warning">
-        Update Collab
+      <button class="btn btn-success">
+        Create Bookmark
       </button>
       or
-      <a href="/collabs/<%= @collab.id %>">Cancel</a>
+      <a href="/bookmarks">Cancel</a>
     </form>
   </div>
 </div>

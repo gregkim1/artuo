@@ -6,6 +6,10 @@ class Tag < ApplicationRecord
 
   # Indirect associations
 
+  has_many   :artworks,
+             :through => :taggings,
+             :source => :artwork
+
   # Validations
 
 end

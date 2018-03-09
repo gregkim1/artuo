@@ -11,8 +11,14 @@
       <dt>Image url</dt>
       <dd><%= @artwork.image_url %></dd>
 
-      <dt>Tag</dt>
-      <dd><%= @artwork.tag %></dd>
+      <dt>Edition</dt>
+      <dd><%= @artwork.edition %></dd>
+
+      <dt>Cost</dt>
+      <dd><%= @artwork.cost %></dd>
+
+      <dt>For sale</dt>
+      <dd><%= @artwork.for_sale %></dd>
 
     </dl>
 
@@ -68,6 +74,15 @@
 
       <!-- Label and input for artwork_id -->
       <input type="hidden" name="artwork_id" value="<%= @artwork.id %>">
+
+      <!-- Label and input for seller_id -->
+      <div class="form-group">
+        <label for="seller_id" class="control-label">
+          Seller
+        </label>
+
+        <%= select_tag(:seller_id, options_from_collection_for_select(User.all, :id, :email), :class => "form-control") %>
+      </div>
 
       <button class="btn btn-block btn-success">
         Create Ownership
@@ -141,19 +156,19 @@
         Collabs
       </li>
 
-      <% @artwork.collabs.each do |collab| %>
+      <% @artwork.collabs.each do |creation| %>
         <li class="list-group-item">
-          <a href="/collabs/<%= collab.id %>">
-            <%= collab.artwork_id %>
+          <a href="/creations/<%= creation.id %>">
+            <%= creation.artwork_id %>
           </a>
           <div class="btn-group btn-group-xs pull-right">
-            <a href="/collabs/<%= collab.id %>" class="btn btn-primary">
+            <a href="/creations/<%= creation.id %>" class="btn btn-primary">
               <i class="fa fa-search-plus"></i>
             </a>
-            <a href="/collabs/<%= collab.id %>/edit" class="btn btn-warning">
+            <a href="/creations/<%= creation.id %>/edit" class="btn btn-warning">
               <i class="fa fa-edit"></i>
             </a>
-            <a href="/delete_collab/<%= collab.id %>" class="btn btn-danger" rel="nofollow">
+            <a href="/delete_creation/<%= creation.id %>" class="btn btn-danger" rel="nofollow">
               <i class="fa fa-trash-o"></i>
             </a>
           </div>
@@ -161,7 +176,7 @@
       <% end %>
 
       <li class="list-group-item">
-        <form action="/create_collab" method="post">
+        <form action="/create_creation" method="post">
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
@@ -177,11 +192,184 @@
         <%= select_tag(:artist_id, options_from_collection_for_select(User.all, :id, :email), :class => "form-control") %>
       </div>
 
+      <!-- Label and input for share -->
+      <div class="form-group">
+        <label for="share" class="control-label">
+          Share
+        </label>
+
+        <input type="text" id="share" name="share" placeholder="Share" class="form-control" value="">
+      </div>
+
       <button class="btn btn-block btn-success">
-        Create Collab
+        Create Creation
       </button>
     </form>
       </li>
+    </ul>
+  </div>
+</div>
+
+<!-- A Artwork has many bookmarks -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Bookmarks
+      </li>
+
+      <% @artwork.bookmarks.each do |bookmark| %>
+        <li class="list-group-item">
+          <a href="/bookmarks/<%= bookmark.id %>">
+            <%= bookmark.artwork_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/bookmarks/<%= bookmark.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/bookmarks/<%= bookmark.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_bookmark/<%= bookmark.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_bookmark" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for artwork_id -->
+      <input type="hidden" name="artwork_id" value="<%= @artwork.id %>">
+
+      <!-- Label and input for folder_id -->
+      <div class="form-group">
+        <label for="folder_id" class="control-label">
+          Folder
+        </label>
+
+        <%= select_tag(:folder_id, options_from_collection_for_select(Folder.all, :id, :name), :class => "form-control") %>
+      </div>
+
+      <button class="btn btn-block btn-success">
+        Create Bookmark
+      </button>
+    </form>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- A Artwork has many likes -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Likes
+      </li>
+
+      <% @artwork.likes.each do |like| %>
+        <li class="list-group-item">
+          <a href="/likes/<%= like.id %>">
+            <%= like.artwork_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/likes/<%= like.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/likes/<%= like.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_like/<%= like.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_like" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for artwork_id -->
+      <input type="hidden" name="artwork_id" value="<%= @artwork.id %>">
+
+      <!-- Label and input for user_id -->
+      <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+      <button class="btn btn-block btn-success">
+        Create Like
+      </button>
+    </form>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- A Artwork has many users -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Users
+      </li>
+
+      <% @artwork.users.each do |user| %>
+        <li class="list-group-item">
+          <a href="/users/<%= user.id %>">
+            <%= user.email %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/users/<%= user.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/users/<%= user.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_user/<%= user.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A Artwork has many tags -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Tags
+      </li>
+
+      <% @artwork.tags.each do |tag| %>
+        <li class="list-group-item">
+          <a href="/tags/<%= tag.id %>">
+            <%= tag.created_at %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/tags/<%= tag.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/tags/<%= tag.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_tag/<%= tag.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>

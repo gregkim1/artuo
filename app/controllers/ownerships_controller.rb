@@ -11,7 +11,7 @@ class OwnershipsController < ApplicationController
 
   def index
     @q = Ownership.ransack(params[:q])
-    @ownerships = @q.result(:distinct => true).includes(:user, :artwork).page(params[:page]).per(10)
+    @ownerships = @q.result(:distinct => true).includes(:user, :seller, :artwork).page(params[:page]).per(10)
 
     render("ownerships/index.html.erb")
   end
@@ -33,6 +33,7 @@ class OwnershipsController < ApplicationController
 
     @ownership.user_id = params[:user_id]
     @ownership.artwork_id = params[:artwork_id]
+    @ownership.seller_id = params[:seller_id]
 
     save_status = @ownership.save
 
@@ -58,7 +59,10 @@ class OwnershipsController < ApplicationController
 
   def update
     @ownership = Ownership.find(params[:id])
+
+    @ownership.user_id = params[:user_id]
     @ownership.artwork_id = params[:artwork_id]
+    @ownership.seller_id = params[:seller_id]
 
     save_status = @ownership.save
 

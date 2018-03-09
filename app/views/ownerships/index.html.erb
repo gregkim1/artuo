@@ -54,6 +54,11 @@
     </div>
 
 <div class="form-group">
+      <%= f.label :seller_email_cont, "User email contains" %>
+      <%= f.text_field :seller_email_cont, :class => "form-control", :placeholder => "User email contains" %>
+    </div>
+
+<div class="form-group">
       <%= f.label :artwork_caption_cont, "Artwork caption contains" %>
       <%= f.text_field :artwork_caption_cont, :class => "form-control", :placeholder => "Artwork caption contains" %>
     </div>
@@ -74,6 +79,7 @@
       <tr>
         <th>User</th>
         <th>Artwork</th>
+        <th>Seller</th>
         <th>Actions</th>
       </tr>
 
@@ -90,6 +96,13 @@
           <% if ownership.artwork.present? %>
             <a href="/artworks/<%= ownership.artwork.id %>">
               <%= ownership.artwork.caption %>
+            </a>
+          <% end %>
+        </td>
+        <td>
+          <% if ownership.seller.present? %>
+            <a href="/users/<%= ownership.seller.id %>">
+              <%= ownership.seller.email %>
             </a>
           <% end %>
         </td>

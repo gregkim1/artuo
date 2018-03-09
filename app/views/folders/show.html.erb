@@ -1,0 +1,90 @@
+<div class="page-header">
+  <h3>Folder #<%= @folder.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>User</dt>
+      <dd>
+        <% if @folder.user.present? %>
+          <a href="/users/<%= @folder.user_id %>">
+            <%= @folder.user.email %>
+          </a>
+        <% end %>
+      </dd>
+
+      <dt>Name</dt>
+      <dd><%= @folder.name %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/folders" class="btn btn-primary">
+        Back
+      </a>
+      <% if current_user == @folder.user %>
+        <a href="/folders/<%= @folder.id %>/edit" class="btn btn-warning">
+          Edit
+        </a>
+        <a href="/delete_folder/<%= @folder.id %>" class="btn btn-danger" rel="nofollow">
+          Delete
+        </a>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- A Folder has many bookmarks -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Bookmarks
+      </li>
+
+      <% @folder.bookmarks.each do |bookmark| %>
+        <li class="list-group-item">
+          <a href="/bookmarks/<%= bookmark.id %>">
+            <%= bookmark.artwork_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/bookmarks/<%= bookmark.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/bookmarks/<%= bookmark.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_bookmark/<%= bookmark.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_bookmark" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for artwork_id -->
+      <div class="form-group">
+        <label for="artwork_id" class="control-label">
+          Artwork
+        </label>
+
+        <%= select_tag(:artwork_id, options_from_collection_for_select(Artwork.all, :id, :caption), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for folder_id -->
+      <input type="hidden" name="folder_id" value="<%= @folder.id %>">
+
+      <button class="btn btn-block btn-success">
+        Create Bookmark
+      </button>
+    </form>
+      </li>
+    </ul>
+  </div>
+</div>

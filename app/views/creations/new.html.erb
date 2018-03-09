@@ -1,0 +1,55 @@
+<!-- Validation failure messages -->
+<% if @creation.errors.any? %>
+  <% @creation.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Creation</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_creation" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for artwork_id -->
+      <div class="form-group">
+        <label for="artwork_id" class="control-label">
+          Artwork
+        </label>
+
+        <%= select_tag(:artwork_id, options_from_collection_for_select(Artwork.all, :id, :caption, @creation.artwork_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for artist_id -->
+      <div class="form-group">
+        <label for="artist_id" class="control-label">
+          Artist
+        </label>
+
+        <%= select_tag(:artist_id, options_from_collection_for_select(User.all, :id, :email, @creation.artist_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for share -->
+      <div class="form-group">
+        <label for="share" class="control-label">
+          Share
+        </label>
+
+        <input type="text" id="share" name="share" placeholder="Share" class="form-control" value="<%= @creation.share %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Creation
+      </button>
+      or
+      <a href="/creations">Cancel</a>
+    </form>
+  </div>
+</div>

@@ -35,6 +35,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.string :email
       t.string :password
       t.boolean :is_artist
+      t.text :bio
+      t.string :location
 
       t.timestamps null: false
     end

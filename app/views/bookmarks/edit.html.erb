@@ -1,0 +1,46 @@
+<!-- Validation failure messages -->
+<% if @bookmark.errors.any? %>
+  <% @bookmark.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Bookmark #<%= @bookmark.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_bookmark/<%= @bookmark.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for artwork_id -->
+      <div class="form-group">
+        <label for="artwork_id" class="control-label">
+          Artwork
+        </label>
+
+        <%= select_tag(:artwork_id, options_from_collection_for_select(Artwork.all, :id, :caption, @bookmark.artwork_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for folder_id -->
+      <div class="form-group">
+        <label for="folder_id" class="control-label">
+          Folder
+        </label>
+
+        <%= select_tag(:folder_id, options_from_collection_for_select(Folder.all, :id, :name, @bookmark.folder_id), :class => "form-control") %>
+      </div>
+
+      <button class="btn btn-warning">
+        Update Bookmark
+      </button>
+      or
+      <a href="/bookmarks/<%= @bookmark.id %>">Cancel</a>
+    </form>
+  </div>
+</div>

@@ -23,6 +23,15 @@
         <% end %>
       </dd>
 
+      <dt>Seller</dt>
+      <dd>
+        <% if @ownership.seller.present? %>
+          <a href="/users/<%= @ownership.seller_id %>">
+            <%= @ownership.seller.email %>
+          </a>
+        <% end %>
+      </dd>
+
     </dl>
 
     <div class="btn-group btn-group-justified">

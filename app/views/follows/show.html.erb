@@ -5,19 +5,19 @@
 <div class="row">
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
-      <dt>User</dt>
+      <dt>Follower</dt>
       <dd>
         <% if @follow.user.present? %>
-          <a href="/users/<%= @follow.user_id %>">
+          <a href="/users/<%= @follow.follower_id %>">
             <%= @follow.user.email %>
           </a>
         <% end %>
       </dd>
 
-      <dt>Artist</dt>
+      <dt>Followed</dt>
       <dd>
         <% if @follow.artist.present? %>
-          <a href="/users/<%= @follow.artist_id %>">
+          <a href="/users/<%= @follow.followed_id %>">
             <%= @follow.artist.email %>
           </a>
         <% end %>
