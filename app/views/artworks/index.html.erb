@@ -14,9 +14,43 @@
   </div>
 
 <div class="form-group">
-    <%= f.label :tag_cont, "Tag contains" %>
-    <%= f.text_field :tag_cont, :class => "form-control", :placeholder => "Tag contains" %>
+    <%= f.label :for_sale_eq, "For sale" %>
+    <div>
+      <label class="radio-inline">
+        <%= f.radio_button :for_sale_eq, "1", checked: ((params[:q] && params[:q][:for_sale_eq]) == "1" ? "checked" : "") %> Yes
+      </label>
+      <label class="radio-inline">
+        <%= f.radio_button :for_sale_eq, "0", checked: ((params[:q] && params[:q][:for_sale_eq]) == "0" ? "checked" : "")%> No
+      </label>
+      <label class="radio-inline">
+        <%= f.radio_button :for_sale_eq, ""%> Either
+      </label>
+    </div>
   </div>
+
+<div class="form-group">
+  <%= f.label :cost, "Cost" %>
+  <div class="row">
+    <div class='col-md-6 mb-1'>
+      <%= f.text_field :cost_gteq, :class => "form-control", :placeholder => "Cost greater than or equal to" %>
+    </div>
+    <div class='col-md-6'>
+      <%= f.text_field :cost_lteq, :class => "form-control", :placeholder => "Cost less than or equal to" %>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :edition, "Edition" %>
+  <div class="row">
+    <div class='col-md-6 mb-1'>
+      <%= f.text_field :edition_gteq, :class => "form-control", :placeholder => "Edition greater than or equal to" %>
+    </div>
+    <div class='col-md-6'>
+      <%= f.text_field :edition_lteq, :class => "form-control", :placeholder => "Edition less than or equal to" %>
+    </div>
+  </div>
+</div>
 
 <div class="form-group">
     <%= f.label :image_url_cont, "Image url contains" %>
@@ -63,7 +97,50 @@
           });
       </script>
 
-        
+        <div class="form-group">
+      <%= f.label :users_email_cont, "User email contains" %>
+      <%= f.text_field :users_email_cont, :class => "form-control", :placeholder => "User email contains" %>
+    </div>
+
+<div class="form-group">
+          <%= f.label :created_at, "Tag Created at" %>
+          <div class="row">
+            <div class='col-md-6 mb-1'>
+              <div class='input-group date' id='tagsgteqcreated_atPicker'>
+                  <%= f.text_field :tags_created_at_gteq, :class => "form-control", :placeholder => "Tag Created at greater than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+
+            <div class='col-md-6'>
+              <div class='input-group date' id='tagslteqcreated_atPicker'>
+                  <%= f.text_field :tags_created_at_lteq, :class => "form-control", :placeholder => "Tag Created at less than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+          </div>
+      </div>
+      <script type="text/javascript">
+          $(function () {
+              $('#tagsgteqcreated_atPicker').datetimepicker({
+                  format: 'YYYY-MM-DD hh:mm:SS'
+              });
+              $('#tagslteqcreated_atPicker').datetimepicker({
+                  useCurrent: false,
+                  format: 'YYYY-MM-DD hh:mm:SS'
+              });
+              $('#tagsgteqcreated_atPicker').on("dp.change", function (e) {
+                  $('#tagslteqcreated_atPicker').data("DateTimePicker").minDate(e.date);
+              });
+              $('#tagslteqcreated_atPicker').on("dp.change", function (e) {
+                  $('#tagsgteqcreated_atPicker').data("DateTimePicker").maxDate(e.date);
+              });
+          });
+      </script>
 
       <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 
@@ -81,7 +158,9 @@
       <tr>
         <th>Caption</th>
         <th>Image url</th>
-        <th>Tag</th>
+        <th>Edition</th>
+        <th>Cost</th>
+        <th>For sale</th>
         <th>Actions</th>
       </tr>
 
@@ -89,7 +168,9 @@
       <tr>
         <td><%= artwork.caption %></td>
         <td><%= artwork.image_url %></td>
-        <td><%= artwork.tag %></td>
+        <td><%= artwork.edition %></td>
+        <td><%= artwork.cost %></td>
+        <td><%= artwork.for_sale %></td>
         <td>
           <a href="/artworks/<%= artwork.id %>" class="btn btn-primary">Show</a>
           <a href="/artworks/<%= artwork.id %>/edit" class="btn btn-warning">Edit</a>

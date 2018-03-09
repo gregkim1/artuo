@@ -48,7 +48,10 @@
           });
       </script>
 
-        
+        <div class="form-group">
+      <%= f.label :artworks_caption_cont, "Artwork caption contains" %>
+      <%= f.text_field :artworks_caption_cont, :class => "form-control", :placeholder => "Artwork caption contains" %>
+    </div>
 
       <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 

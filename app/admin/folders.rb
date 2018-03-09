@@ -1,6 +1,6 @@
-ActiveAdmin.register Collab do
+ActiveAdmin.register Folder do
 
- permit_params :artwork_id, :artist_id
+ permit_params :user_id, :name
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

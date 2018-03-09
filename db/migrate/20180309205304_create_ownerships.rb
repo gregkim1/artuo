@@ -3,6 +3,7 @@ class CreateOwnerships < ActiveRecord::Migration
     create_table :ownerships do |t|
       t.integer :user_id
       t.integer :artwork_id
+      t.integer :seller_id
 
       t.timestamps
 

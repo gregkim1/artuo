@@ -14,6 +14,12 @@
       <dt>Is artist</dt>
       <dd><%= @user.is_artist %></dd>
 
+      <dt>Bio</dt>
+      <dd><%= @user.bio %></dd>
+
+      <dt>Location</dt>
+      <dd><%= @user.location %></dd>
+
     </dl>
 
     <div class="btn-group btn-group-justified">
@@ -42,7 +48,7 @@
             <a href="/ownerships/<%= ownership.id %>" class="btn btn-primary">
               <i class="fa fa-search-plus"></i>
             </a>
-            <%if current_user == ownership.user %>
+            <%if current_user == ownership.seller %>
               <a href="/ownerships/<%= ownership.id %>/edit" class="btn btn-warning">
                 <i class="fa fa-edit"></i>
               </a>
@@ -66,20 +72,20 @@
         Collabs
       </li>
 
-      <% @user.collabs.each do |collab| %>
+      <% @user.collabs.each do |creation| %>
         <li class="list-group-item">
-          <a href="/collabs/<%= collab.id %>">
-            <%= collab.artwork_id %>
+          <a href="/creations/<%= creation.id %>">
+            <%= creation.artwork_id %>
           </a>
           <div class="btn-group btn-group-xs pull-right">
-            <a href="/collabs/<%= collab.id %>" class="btn btn-primary">
+            <a href="/creations/<%= creation.id %>" class="btn btn-primary">
               <i class="fa fa-search-plus"></i>
             </a>
-            <%if current_user == collab.artist %>
-              <a href="/collabs/<%= collab.id %>/edit" class="btn btn-warning">
+            <%if current_user == creation.artist %>
+              <a href="/creations/<%= creation.id %>/edit" class="btn btn-warning">
                 <i class="fa fa-edit"></i>
               </a>
-              <a href="/delete_collab/<%= collab.id %>" class="btn btn-danger" rel="nofollow">
+              <a href="/delete_creation/<%= creation.id %>" class="btn btn-danger" rel="nofollow">
                 <i class="fa fa-trash-o"></i>
               </a>
             <% end %>
@@ -102,7 +108,7 @@
       <% @user.follows.each do |follow| %>
         <li class="list-group-item">
           <a href="/follows/<%= follow.id %>">
-            <%= follow.user_id %>
+            <%= follow.follower_id %>
           </a>
           <div class="btn-group btn-group-xs pull-right">
             <a href="/follows/<%= follow.id %>" class="btn btn-primary">
@@ -135,7 +141,7 @@
       <% @user.following.each do |follow| %>
         <li class="list-group-item">
           <a href="/follows/<%= follow.id %>">
-            <%= follow.user_id %>
+            <%= follow.follower_id %>
           </a>
           <div class="btn-group btn-group-xs pull-right">
             <a href="/follows/<%= follow.id %>" class="btn btn-primary">
@@ -149,6 +155,260 @@
                 <i class="fa fa-trash-o"></i>
               </a>
             <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A User has many folders -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Folders
+      </li>
+
+      <% @user.folders.each do |folder| %>
+        <li class="list-group-item">
+          <a href="/folders/<%= folder.id %>">
+            <%= folder.name %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/folders/<%= folder.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <%if current_user == folder.user %>
+              <a href="/folders/<%= folder.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+              <a href="/delete_folder/<%= folder.id %>" class="btn btn-danger" rel="nofollow">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A User has many likes -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Likes
+      </li>
+
+      <% @user.likes.each do |like| %>
+        <li class="list-group-item">
+          <a href="/likes/<%= like.id %>">
+            <%= like.artwork_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/likes/<%= like.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <%if current_user == like.user %>
+              <a href="/likes/<%= like.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+              <a href="/delete_like/<%= like.id %>" class="btn btn-danger" rel="nofollow">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A User has many past_ownerships -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Past Ownerships
+      </li>
+
+      <% @user.past_ownerships.each do |ownership| %>
+        <li class="list-group-item">
+          <a href="/ownerships/<%= ownership.id %>">
+            <%= ownership.user_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/ownerships/<%= ownership.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <%if current_user == ownership.seller %>
+              <a href="/ownerships/<%= ownership.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+              <a href="/delete_ownership/<%= ownership.id %>" class="btn btn-danger" rel="nofollow">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A User has many artworks -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Artworks
+      </li>
+
+      <% @user.artworks.each do |artwork| %>
+        <li class="list-group-item">
+          <a href="/artworks/<%= artwork.id %>">
+            <%= artwork.caption %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/artworks/<%= artwork.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/artworks/<%= artwork.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_artwork/<%= artwork.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A User has many followed_artists -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Followed Artists
+      </li>
+
+      <% @user.followed_artists.each do |user| %>
+        <li class="list-group-item">
+          <a href="/users/<%= user.id %>">
+            <%= user.email %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/users/<%= user.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/users/<%= user.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_user/<%= user.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A User has many followers -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Followers
+      </li>
+
+      <% @user.followers.each do |user| %>
+        <li class="list-group-item">
+          <a href="/users/<%= user.id %>">
+            <%= user.email %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/users/<%= user.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/users/<%= user.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_user/<%= user.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A User has many sellers -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Sellers
+      </li>
+
+      <% @user.sellers.each do |user| %>
+        <li class="list-group-item">
+          <a href="/users/<%= user.id %>">
+            <%= user.email %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/users/<%= user.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/users/<%= user.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_user/<%= user.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A User has many buyers -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Buyers
+      </li>
+
+      <% @user.buyers.each do |user| %>
+        <li class="list-group-item">
+          <a href="/users/<%= user.id %>">
+            <%= user.email %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/users/<%= user.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/users/<%= user.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_user/<%= user.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
           </div>
         </li>
       <% end %>

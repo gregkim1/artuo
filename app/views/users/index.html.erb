@@ -12,6 +12,8 @@
         <th>Email</th>
         <th>Password</th>
         <th>Is artist</th>
+        <th>Bio</th>
+        <th>Location</th>
         <th>Actions</th>
       </tr>
 
@@ -20,6 +22,8 @@
         <td><%= user.email %></td>
         <td><%= user.password %></td>
         <td><%= user.is_artist %></td>
+        <td><%= user.bio %></td>
+        <td><%= user.location %></td>
         <td>
           <a href="/users/<%= user.id %>" class="btn btn-primary">Show</a>
         </td>

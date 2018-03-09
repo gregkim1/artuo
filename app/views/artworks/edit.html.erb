@@ -36,13 +36,30 @@
         <input type="text" id="image_url" name="image_url" placeholder="Image url" class="form-control" value="<%= @artwork.image_url %>">
       </div>
 
-      <!-- Label and input for tag -->
+      <!-- Label and input for edition -->
       <div class="form-group">
-        <label for="tag" class="control-label">
-          Tag
+        <label for="edition" class="control-label">
+          Edition
         </label>
 
-        <input type="text" id="tag" name="tag" placeholder="Tag" class="form-control" value="<%= @artwork.tag %>">
+        <input type="text" id="edition" name="edition" placeholder="Edition" class="form-control" value="<%= @artwork.edition %>">
+      </div>
+
+      <!-- Label and input for cost -->
+      <div class="form-group">
+        <label for="cost" class="control-label">
+          Cost
+        </label>
+
+        <input type="text" id="cost" name="cost" placeholder="Cost" class="form-control" value="<%= @artwork.cost %>">
+      </div>
+
+      <!-- Label and input for for_sale -->
+      <div class="checkbox">
+        <label for="for_sale">
+          <input type="checkbox" id="for_sale" name="for_sale" value="1" <%= "checked" if @artwork.for_sale %>>
+          For sale
+        </label>
       </div>
 
       <button class="btn btn-warning">

@@ -1,4 +1,4 @@
-class Collab < ApplicationRecord
+class Creation < ApplicationRecord
   # Direct associations
 
   belongs_to :art,
@@ -7,7 +7,7 @@ class Collab < ApplicationRecord
 
   belongs_to :artist,
              :class_name => "User",
-             :counter_cache => true
+             :counter_cache => :collabs_count
 
   # Indirect associations
 

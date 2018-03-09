@@ -30,6 +30,15 @@
         <%= select_tag(:artwork_id, options_from_collection_for_select(Artwork.all, :id, :caption, @ownership.artwork_id), :class => "form-control") %>
       </div>
 
+      <!-- Label and input for seller_id -->
+      <div class="form-group">
+        <label for="seller_id" class="control-label">
+          Seller
+        </label>
+
+        <%= select_tag(:seller_id, options_from_collection_for_select(User.all, :id, :email, @ownership.seller_id), :class => "form-control") %>
+      </div>
+
       <button class="btn btn-success">
         Create Ownership
       </button>

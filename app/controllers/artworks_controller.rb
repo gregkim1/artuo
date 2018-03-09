@@ -1,13 +1,15 @@
 class ArtworksController < ApplicationController
   def index
     @q = Artwork.ransack(params[:q])
-    @artworks = @q.result(:distinct => true).includes(:ownerships, :taggings, :collabs).page(params[:page]).per(10)
+    @artworks = @q.result(:distinct => true).includes(:ownerships, :taggings, :collabs, :bookmarks, :likes, :users, :tags).page(params[:page]).per(10)
 
     render("artworks/index.html.erb")
   end
 
   def show
-    @collab = Collab.new
+    @like = Like.new
+    @bookmark = Bookmark.new
+    @creation = Creation.new
     @tagging = Tagging.new
     @ownership = Ownership.new
     @artwork = Artwork.find(params[:id])
@@ -26,7 +28,9 @@ class ArtworksController < ApplicationController
 
     @artwork.caption = params[:caption]
     @artwork.image_url = params[:image_url]
-    @artwork.tag = params[:tag]
+    @artwork.edition = params[:edition]
+    @artwork.cost = params[:cost]
+    @artwork.for_sale = params[:for_sale]
 
     save_status = @artwork.save
 
@@ -55,7 +59,9 @@ class ArtworksController < ApplicationController
 
     @artwork.caption = params[:caption]
     @artwork.image_url = params[:image_url]
-    @artwork.tag = params[:tag]
+    @artwork.edition = params[:edition]
+    @artwork.cost = params[:cost]
+    @artwork.for_sale = params[:for_sale]
 
     save_status = @artwork.save
 

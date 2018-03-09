@@ -40,8 +40,8 @@ class FollowsController < ApplicationController
   def create
     @follow = Follow.new
 
-    @follow.user_id = params[:user_id]
-    @follow.artist_id = params[:artist_id]
+    @follow.follower_id = params[:follower_id]
+    @follow.followed_id = params[:followed_id]
 
     save_status = @follow.save
 
@@ -68,8 +68,8 @@ class FollowsController < ApplicationController
   def update
     @follow = Follow.find(params[:id])
 
-    @follow.user_id = params[:user_id]
-    @follow.artist_id = params[:artist_id]
+    @follow.follower_id = params[:follower_id]
+    @follow.followed_id = params[:followed_id]
 
     save_status = @follow.save
 
